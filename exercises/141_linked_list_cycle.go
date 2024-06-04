@@ -9,16 +9,33 @@ import "fmt"
 // Return the head of the merged linked list.
 
 func hasCycle(head *ListNode) bool {
-	visited := make(map[ListNode]bool)
+	visitedMap := map[*ListNode]bool{}
+
 	for head != nil {
-		if _, exists := visited[*head]; exists {
-			return true // Cycle detected
+		_, ok := visitedMap[head]
+		if ok {
+			return true
+		} else {
+			visitedMap[head] = true
 		}
-		visited[*head] = true
+
 		head = head.Next
 	}
-	return false // No cycle
+
+	return false
 }
+
+// func hasCycle(head *ListNode) bool {
+// 	visited := make(map[ListNode]bool)
+// 	for head != nil {
+// 		if _, exists := visited[*head]; exists {
+// 			return true // Cycle detected
+// 		}
+// 		visited[*head] = true
+// 		head = head.Next
+// 	}
+// 	return false // No cycle
+// }
 
 func HasCycleTester() bool {
 	node4 := &ListNode{Val: 4, Next: nil}   // Last node, points to nil

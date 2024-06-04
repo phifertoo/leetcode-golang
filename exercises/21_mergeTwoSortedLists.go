@@ -20,35 +20,61 @@ type ListNode struct {
 // 3. iterate through both linkedLists.
 // 4. if ListNode1.Value <= ListNode2.Value => append ListNode1, append the remaining to current.Next
 // 5. append the entire
-func mergeTwoLists(listNode1 *ListNode, listNode2 *ListNode) *ListNode {
+func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	head := &ListNode{}
 	current := head
-
-	for listNode1 != nil && listNode2 != nil {
-		if listNode1.Val <= listNode2.Val {
-			// store the next value in current.Next
-			current.Next = listNode1
-			// move listNode1 forward
-			listNode1 = listNode1.Next
+	for list1 != nil && list2 != nil {
+		if list1.Val <= list2.Val {
+			current.Next = list1
+			list1 = list1.Next
 		} else {
-			// store the next value in current.Next
-			current.Next = listNode2
-			// move listNode1 forward
-			listNode2 = listNode2.Next
+			current.Next = list2
+			list2 = list2.Next
 		}
-		// set the current to the value we stored in current.Next
+
 		current = current.Next
 	}
 
-	if listNode1 == nil {
-		current.Next = listNode2
+	if list1 == nil {
+		current.Next = list2
 	}
-	if listNode2 == nil {
-		current.Next = listNode1
+
+	if list2 == nil {
+		current.Next = list1
 	}
 
 	return head.Next
 }
+
+// func mergeTwoLists(listNode1 *ListNode, listNode2 *ListNode) *ListNode {
+// 	head := &ListNode{}
+// 	current := head
+
+// 	for listNode1 != nil && listNode2 != nil {
+// 		if listNode1.Val <= listNode2.Val {
+// 			// store the next value in current.Next
+// 			current.Next = listNode1
+// 			// move listNode1 forward
+// 			listNode1 = listNode1.Next
+// 		} else {
+// 			// store the next value in current.Next
+// 			current.Next = listNode2
+// 			// move listNode1 forward
+// 			listNode2 = listNode2.Next
+// 		}
+// 		// set the current to the value we stored in current.Next
+// 		current = current.Next
+// 	}
+
+// 	if listNode1 == nil {
+// 		current.Next = listNode2
+// 	}
+// 	if listNode2 == nil {
+// 		current.Next = listNode1
+// 	}
+
+// 	return head.Next
+// }
 
 func MergeTwoListsTester() bool {
 	node3 := &ListNode{Val: 4, Next: nil}   // Last node, points to nil

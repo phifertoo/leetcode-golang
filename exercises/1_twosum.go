@@ -22,21 +22,45 @@ import "fmt"
 // Input: nums = [3,3], target = 6
 // Output: [0,1]
 
-func TwoSums(nums []int, target int) []int {
-	indices := make(map[int]int)
-	// create a hash map
-	for i, element := range nums {
-		indices[target-element] = i
-	}
+// func TwoSums(nums []int, target int) []int {
+// 	indices := make(map[int]int)
+// 	// create a hash map
+// 	for i, element := range nums {
+// 		indices[target-element] = i
+// 	}
 
-	for i, element := range nums {
-		_, exists := indices[element]
-		if exists && element != target-element {
-			return []int{i, indices[element]}
+// 	for i, element := range nums {
+// 		_, exists := indices[element]
+// 		if exists && element != target-element {
+// 			return []int{i, indices[element]}
+// 		}
+// 	}
+
+// 	return []int{}
+// }
+
+func TwoSums(nums []int, target int) []int {
+	output := []int{}
+
+	leftIndex := 0
+	rightIndex := len(nums)
+
+	for leftIndex < rightIndex {
+		sum := nums[leftIndex] + nums[rightIndex]
+		if sum == target {
+			output = []int{leftIndex, rightIndex}
+		}
+
+		if sum > target {
+			rightIndex--
+		}
+
+		if sum < target {
+			leftIndex++
 		}
 	}
 
-	return []int{}
+	return output
 }
 
 // func TwoSums(nums []int, target int) []int {

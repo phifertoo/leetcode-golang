@@ -17,34 +17,61 @@ import (
 // when thinking about loops, check if seen
 
 func HappyNumber(n int) bool {
+	// convert n into a string
+	// iterate
 
-	targetNumber := n
-	seenMap := make(map[int]bool)
-
-	for targetNumber != 1 {
-
-		numStr := strconv.Itoa(targetNumber)
-		tempSum := 0
-		for _, number := range numStr {
-			parsedInt, err := strconv.Atoi(string(number))
-			if err != nil {
-				return false
-			}
-			tempSum += parsedInt * parsedInt
+	isHappy := false
+	cycleFound := false
+	iteratedNumbers := map[int]bool{}
+	for !cycleFound || !isHappy {
+		sum := 0
+		sumString := fmt.Sprintf("%d", 1)
+		for _, num := range sumString {
+			parsedInt, _ := strconv.Atoi(string(num))
+			sum += parsedInt * parsedInt
 		}
-		fmt.Print("tempSum", tempSum)
-
-		_, exists := seenMap[tempSum]
-		if exists {
+		_, ok := iteratedNumbers[sum]
+		if ok {
 			return false
-		} else {
-			seenMap[tempSum] = true
 		}
-		targetNumber = tempSum
+
+		if sum == 1 {
+			cycleFound = true
+		}
 	}
 
 	return true
 }
+
+// func HappyNumber(n int) bool {
+
+// 	targetNumber := n
+// 	seenMap := make(map[int]bool)
+
+// 	for targetNumber != 1 {
+
+// 		numStr := strconv.Itoa(targetNumber)
+// 		tempSum := 0
+// 		for _, number := range numStr {
+// 			parsedInt, err := strconv.Atoi(string(number))
+// 			if err != nil {
+// 				return false
+// 			}
+// 			tempSum += parsedInt * parsedInt
+// 		}
+// 		fmt.Print("tempSum", tempSum)
+
+// 		_, exists := seenMap[tempSum]
+// 		if exists {
+// 			return false
+// 		} else {
+// 			seenMap[tempSum] = true
+// 		}
+// 		targetNumber = tempSum
+// 	}
+
+// 	return true
+// }
 
 func HappyNumberTester() bool {
 	fmt.Print(HappyNumber(19)) //true

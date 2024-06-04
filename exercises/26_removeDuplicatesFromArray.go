@@ -24,22 +24,40 @@ import "fmt"
 // If all assertions pass, then your solution will be accepted.
 
 func removeDuplicatesFromArray(nums []int) int {
+	// [1, 4, 4, 5, 8, 8, 9]
 	if len(nums) == 0 {
 		return 0
 	}
 
-	j := 1 // Pointer for the position of the next unique element
+	//  we don't care about the numbers after the initial k
+	differentIndex := 1
 	for i := 1; i < len(nums); i++ {
-		// starting at index = 1, if the current number doesn't equal the previous
-		// number, set the next number in the array to the current number
 		if nums[i] != nums[i-1] {
-			nums[j] = nums[i]
-			j++
+			nums[differentIndex] = nums[i]
+			differentIndex++
 		}
 	}
 
-	return j // j is the number of unique elements
+	return differentIndex
 }
+
+// func removeDuplicatesFromArray(nums []int) int {
+// 	if len(nums) == 0 {
+// 		return 0
+// 	}
+
+// 	j := 1 // Pointer for the position of the next unique element
+// 	for i := 1; i < len(nums); i++ {
+// 		// starting at index = 1, if the current number doesn't equal the previous
+// 		// number, set the next number in the array to the current number
+// 		if nums[i] != nums[i-1] {
+// 			nums[j] = nums[i]
+// 			j++
+// 		}
+// 	}
+
+// 	return j // j is the number of unique elements
+// }
 
 func RemoveDuplicatesFromArrayTester() bool {
 	fmt.Print(removeDuplicatesFromArray([]int{1, 1, 2}))                      //2

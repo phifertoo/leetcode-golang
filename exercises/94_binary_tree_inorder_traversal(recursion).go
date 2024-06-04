@@ -11,24 +11,44 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func InorderTraversal(root *TreeNode) []int {
+func inorderTraversal(root *TreeNode) []int {
 	output := []int{}
 
-	inorder(root, &output)
+	inOrderRecursion(root, &output)
 
 	return output
 }
 
-func inorder(node *TreeNode, output *[]int) {
-	if node == nil {
+func inOrderRecursion(root *TreeNode, output *[]int) {
+	if root == nil {
 		return
 	}
 
-	inorder(node.Left, output)
-	// remember to use the reference because you are not returning anything
-	*output = append(*output, node.Val)
-	inorder(node.Right, output)
+	inOrderRecursion(root.Left, output)
+
+	*output = append(*output, root.Val)
+
+	inOrderRecursion(root.Right, output)
 }
+
+// func InorderTraversal(root *TreeNode) []int {
+// 	output := []int{}
+
+// 	inorder(root, &output)
+
+// 	return output
+// }
+
+// func inorder(node *TreeNode, output *[]int) {
+// 	if node == nil {
+// 		return
+// 	}
+
+// 	inorder(node.Left, output)
+// 	// remember to use the reference because you are not returning anything
+// 	*output = append(*output, node.Val)
+// 	inorder(node.Right, output)
+// }
 
 // func InorderTraversal(root *TreeNode) []int {
 // 	output := []int{}
@@ -54,7 +74,7 @@ func InorderTraversalTester() bool {
 	node3 := TreeNode{Val: 3, Right: nil, Left: nil}
 	node2 := TreeNode{Val: 2, Right: nil, Left: &node3}
 	node1 := TreeNode{Val: 1, Right: &node2, Left: nil}
-	fmt.Print(InorderTraversal(&node1)) // [1, 3,2]
+	fmt.Print(inorderTraversal(&node1)) // [1, 3,2]
 
 	return true
 }

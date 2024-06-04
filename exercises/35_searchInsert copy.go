@@ -9,21 +9,31 @@ import (
 // You must write an algorithm with O(log n) runtime complexity.
 
 func SearchInsert(nums []int, target int) int {
-	if len(nums) == 0 {
-		return 0
-	}
-
-	for i, element := range nums {
-		if element == target || target < element {
-			if i == 0 {
-				return 0
-			}
+	for i, num := range nums {
+		if num == target || num > target {
 			return i
 		}
 	}
 
 	return len(nums)
 }
+
+// func SearchInsert(nums []int, target int) int {
+// 	if len(nums) == 0 {
+// 		return 0
+// 	}
+
+// 	for i, element := range nums {
+// 		if element == target || target < element {
+// 			if i == 0 {
+// 				return 0
+// 			}
+// 			return i
+// 		}
+// 	}
+
+// 	return len(nums)
+// }
 
 func SearchInsertTester() bool {
 	fmt.Print(SearchInsert([]int{1, 3, 5, 6}, 5)) // 2

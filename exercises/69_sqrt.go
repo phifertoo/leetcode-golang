@@ -1,6 +1,8 @@
 package exercises
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well.
 
@@ -17,8 +19,8 @@ func Sqrt(x int) int {
 }
 
 func SqrtTester() bool {
-	fmt.Print(Sqrt(4)) //2
-	fmt.Print(Sqrt(8)) //2
+	fmt.Print(Sqrt(1041080284)) //2
+	fmt.Print(Sqrt(8))          //2
 
 	return true
 }

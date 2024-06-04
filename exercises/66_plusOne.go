@@ -7,35 +7,57 @@ import "fmt"
 // Increment the large integer by one and return the resulting array of digits.
 
 func PlusOne(digits []int) []int {
-
-	incrementNext := false
-	// needsIncrement := false
+	shouldIncrement := true
 	for i := len(digits) - 1; i >= 0; i-- {
-		// if i == len(digits)-1 {
-		num, shouldIncrementNext := addOne(digits[i])
-		incrementNext = shouldIncrementNext
-		digits[i] = num
-		if !shouldIncrementNext {
-			incrementNext = false
-			break
+		if shouldIncrement {
+			if digits[i] == 9 {
+				digits[i] = 0
+			} else {
+				shouldIncrement = false
+				digits[i]++
+				break
+			}
 		}
 	}
 
-	// handle [9] => [1, 0], [9, 9, 9] => [1, 0, 0. 0]
-	if incrementNext {
+	// this means the for loop ended and needs to prepend a 1 (ie 999)
+	if digits[0] == 0 {
 		digits = append([]int{1}, digits...)
 	}
 
 	return digits
 }
 
-func addOne(num int) (int, bool) {
-	if num == 9 {
-		return 0, true
-	}
+// func PlusOne(digits []int) []int {
 
-	return num + 1, false
-}
+// 	incrementNext := false
+// 	// needsIncrement := false
+// 	for i := len(digits) - 1; i >= 0; i-- {
+// 		// if i == len(digits)-1 {
+// 		num, shouldIncrementNext := addOne(digits[i])
+// 		incrementNext = shouldIncrementNext
+// 		digits[i] = num
+// 		if !shouldIncrementNext {
+// 			incrementNext = false
+// 			break
+// 		}
+// 	}
+
+// 	// handle [9] => [1, 0], [9, 9, 9] => [1, 0, 0. 0]
+// 	if incrementNext {
+// 		digits = append([]int{1}, digits...)
+// 	}
+
+// 	return digits
+// }
+
+// func addOne(num int) (int, bool) {
+// 	if num == 9 {
+// 		return 0, true
+// 	}
+
+// 	return num + 1, false
+// }
 
 func PlusOneTester() bool {
 	fmt.Print(PlusOne([]int{1, 2, 3}))    // [1,2,4]

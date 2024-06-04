@@ -7,28 +7,48 @@ import (
 // Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
 
 // You must implement a solution with a linear runtime complexity and use only constant extra space.
-
 func SingleNumber(nums []int) int {
-	numberMap := make(map[int]bool)
-
-	for _, number := range nums {
-		_, exists := numberMap[number]
-
-		if !exists {
-			numberMap[number] = false
+	// numberMap := make(map[int]int)
+	numberMap := map[int]int{}
+	for _, num := range nums {
+		_, ok := numberMap[num]
+		if ok {
+			numberMap[num]++
 		} else {
-			numberMap[number] = true
+			numberMap[num] = 1
 		}
 	}
 
-	for key := range numberMap {
-		if !numberMap[key] {
+	for key, value := range numberMap {
+		if value == 1 {
 			return key
 		}
 	}
 
 	return 0
 }
+
+// func SingleNumber(nums []int) int {
+// 	numberMap := make(map[int]bool)
+
+// 	for _, number := range nums {
+// 		_, exists := numberMap[number]
+
+// 		if !exists {
+// 			numberMap[number] = false
+// 		} else {
+// 			numberMap[number] = true
+// 		}
+// 	}
+
+// 	for key := range numberMap {
+// 		if !numberMap[key] {
+// 			return key
+// 		}
+// 	}
+
+// 	return 0
+// }
 
 func SingleNumberTester() bool {
 	fmt.Print(SingleNumber([]int{2, 2, 1}))       //1

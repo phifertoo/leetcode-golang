@@ -16,13 +16,33 @@ func TitleToNumber(columnTitle string) int {
 
 	// keep a running sum
 	// multiply the previous total by the total then add the current letter value
-	total := 0
+	sum := 0
 	for _, letter := range columnTitle {
-		total = total*26 + letterMap[string(letter)]
+		sum = sum*26 + letterMap[string(letter)]
 	}
 
-	return total
+	return sum
 }
+
+// func TitleToNumber(columnTitle string) int {
+// 	letterMap := map[string]int{
+// 		"A": 1, "B": 2, "C": 3, "D": 4, "E": 5,
+// 		"F": 6, "G": 7, "H": 8, "I": 9, "J": 10,
+// 		"K": 11, "L": 12, "M": 13, "N": 14, "O": 15,
+// 		"P": 16, "Q": 17, "R": 18, "S": 19, "T": 20,
+// 		"U": 21, "V": 22, "W": 23, "X": 24, "Y": 25,
+// 		"Z": 26,
+// 	}
+
+// 	// keep a running sum
+// 	// multiply the previous total by the total then add the current letter value
+// 	total := 0
+// 	for _, letter := range columnTitle {
+// 		total = total*26 + letterMap[string(letter)]
+// 	}
+
+// 	return total
+// }
 
 func TitleToNumberTester() bool {
 	fmt.Print(TitleToNumber("A"))  // 1
